@@ -42,12 +42,12 @@ public class ShowcaseEntryPoint {
     private void setupMenu( @Observes final ApplicationReadyEvent event ) {
         final Menus menus =
                 newTopLevelMenu( "Home" )
-                        .respondsWith( new Command() {
-                            @Override
-                            public void execute() {
-                                placeManager.goTo( new DefaultPlaceRequest( "MainPerspective" ) );
-                            }
-                        } )
+                        .respondsWith(
+                                () -> placeManager.goTo( "MainPerspective" ) )
+                        .endMenu()
+                        .newTopLevelMenu( "Mood Perspective" )
+                        .respondsWith(
+                                () -> placeManager.goTo( "MoodPerspective" ) )
                         .endMenu()
                         .build();
 
