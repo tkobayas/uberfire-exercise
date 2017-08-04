@@ -1,9 +1,8 @@
 package org.uberfire.client.screens;
 
-import org.jboss.errai.common.client.dom.Form;
-import org.jboss.errai.common.client.dom.Input;
-import org.jboss.errai.ui.client.local.api.IsElement;
+
 import org.jboss.errai.ui.shared.api.annotations.DataField;
+import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
@@ -15,18 +14,23 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.TextBox;
+
 @Dependent
 @Templated
 @WorkbenchScreen( identifier = "MoodScreen" )
-public class MoodScreen implements IsElement {
+public class MoodScreen extends Composite {
+
+//    @Inject
+//    @DataField
+//    Form moodForm;
 
     @Inject
     @DataField
-    Form moodForm;
-
-    @Inject
-    @DataField
-    Input moodTextBox;
+    TextBox moodTextBox;
 
     @Inject
     Event<Mood> moodEvent;
@@ -37,18 +41,12 @@ public class MoodScreen implements IsElement {
     }
 
 
-    @PostConstruct
-    public void init() {
-        moodForm.setOnsubmit( e -> {
-            e.preventDefault();
-            moodEvent.fire( new Mood( moodTextBox.getValue() ) );
-            moodTextBox.setValue( "" );
-        } );
-    }
-
-    @WorkbenchPartView
-    public IsElement getView() {
-        return this;
+    @EventHandler("moodTextBox")
+    private void onKeyDown(KeyDownEvent event) {
+        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+            moodEvent.fire(new Mood(moodTextBox.getText()));
+            moodTextBox.setText("");
+        }
     }
 
 }

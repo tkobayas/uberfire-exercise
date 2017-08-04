@@ -49,6 +49,14 @@ public class ShowcaseEntryPoint {
                             }
                         } )
                         .endMenu()
+                        .newTopLevelMenu( "Mood Perspective" )
+                        .respondsWith( new Command() {
+                            @Override
+                            public void execute() {
+                                placeManager.goTo( new DefaultPlaceRequest( "MoodPerspective" ) );
+                            }
+                        } )
+                        .endMenu()
                         .build();
 
         menubar.addMenus( menus );

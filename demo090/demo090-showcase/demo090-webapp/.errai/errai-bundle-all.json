@@ -1,4 +1,8 @@
 {
   "ActivityNotFoundView.Activity_Not_Found_" : "Activity Not Found: ",
+  "MoodListenerScreen.moodTextBox-placeholder" : "I understand that you are feeling...",
+  "MoodPerspective.Mood_Listener" : "Mood Listener",
+  "MoodPerspective.Our_MoodScreen" : "Our MoodScreen",
+  "MoodScreen.moodTextBox-placeholder" : "How do you feel?",
   "SplashModalFooter.Close" : "Close"
 }
